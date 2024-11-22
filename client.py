@@ -12,7 +12,7 @@ IMAGE_QUALITY = 80
 X_SCREEN = 1280
 Y_SCREEN = 720
 
-SERVER_IP = '127.0.0.1'
+SERVER_IP = "127.0.0.1"
 SERVER_PORT = 3000
 
 skt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -27,14 +27,14 @@ while input_video.isOpened():
     if not ret:
         break
 
-    cv2.imshow('frame', frame)
-    ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, IMAGE_QUALITY])
-    
+    cv2.imshow("frame", frame)
+    ret, buffer = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, IMAGE_QUALITY])
+
     data = pickle.dumps(buffer, 0)
 
     skt.sendto(data, (SERVER_IP, SERVER_PORT))
-    
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
 cv2.destroyAllWindows()
